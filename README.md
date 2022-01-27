@@ -14,7 +14,7 @@ A Singularity recipe is text file which provides instructions to Singularity on 
 Images act as a snapshot of a container that Docker can build upon. They contain the software and its dependencies.
 
 ### Containers ###
-At runtime images become containers. A container can be thought of as a virtual environment in which the software can be run.
+At runtime images become containers.
 
 ### Volumes ###
 Volumes are used to mount data so it can be accessed by a container.
@@ -29,7 +29,7 @@ docker search searchterm
 ```
 Download an image from Docker Hub
 ```
-docker pull user:image
+docker pull repository:tag
 ```
 
 ### Finding Image and Container Information ###
@@ -108,11 +108,11 @@ Singularity can interact with many container registires:
 * Docker Hub
 * Singularity Hub
 
-Pulling a image from the Singularity Container Library
+Pulling an image from the Singularity Container Library
 ```
 singularity pull library://user/image
 ```
-Pulling a image from Docker Hub
+Pulling an image from Docker Hub
 ```
 singularity pull docker://user/image
 ```
@@ -127,5 +127,5 @@ singularity exec image.sif command
 ```
 To execute the runscript of a container
 ```
- singularity run image.sif
+singularity run image.sif
 ```
