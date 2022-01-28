@@ -25,11 +25,11 @@ Volumes are used to mount data so it can be accessed by a container.
 
 Search Docker Hub for images
 ```
-docker search searchterm
+docker search $searchterm
 ```
 Download an image from Docker Hub
 ```
-docker pull repository:tag
+docker pull $repository:tag
 ```
 
 ### Finding Image and Container Information ###
@@ -49,44 +49,48 @@ docker images
 ### Working with Images and Containers ###
 Build an image from a Dockerfile
 ```
-docker build -t imagename -f path/to/Dockerfile
+docker build -t $imagename -f path/to/Dockerfile
 ```
 Run an image, creating a container
 ```
-docker run imagename
+docker run $imagename $command
 ```
 Run an image, while attaching a volume
 ```
-docker run -v /absolute/path/to/files:/path/in/container imagename
+docker run -v /absolute/path/to/files:/path/in/container $imagename $command
 ```
 Run an image with an interactive terminal
 ```
-docker run -it imagename
+docker run -it $imagename bash
 ```
 Run an image, and delete the container once it's stopped running
 ```
-docker run --rm imagename
+docker run --rm $imagename $command
 ```
 Start/stop a container
 ```
-docker start/stop containerid
+docker start/stop $containerid
 ```
 
 ### Deleting Images and Containers ###
 Delete a container
 ```
-docker rm -f containerid
+docker rm $containerid
 ```
 
 Delete an image
 ```
-docker rmi imagename
+docker rmi $imagename
 ```
 
-Stop and delete all containers
+Delete all stopped containers
 ```
-docker stop $(docker ps -aq)
-docker rm $(docker ps -aq)
+docker container prune
+```
+
+Remove dangling images
+```
+docker image prune
 ```
 
 ### Working with volumes ###
@@ -94,7 +98,7 @@ Volumes are used to manage data in Docker. By default the data in a container wi
 
 We can attach a host volume to any directory in the container using the -v flag. Note that when attaching a volume you must provide Docker with the absolute (full) path.
 ```
-docker run -v /path/to/volume/on/host:/path/to/directory/in/container imagename
+docker run -v /path/to/volume/on/host:/path/to/directory/in/container $imagename $command
 ```
 
 ## Singularity ##
@@ -106,26 +110,26 @@ Singularity images take the form of .sif files. As well as pulling images from S
 Singularity can interact with many container registires:
 * Singularity Container Library (Sylabs)
 * Docker Hub
-* Singularity Hub
+* Singularity Hub (no longer being updated, archive only)
 
 Pulling an image from the Singularity Container Library
 ```
-singularity pull library://user/image
+singularity pull library://repository:tag
 ```
 Pulling an image from Docker Hub
 ```
-singularity pull docker://user/image
+singularity pull docker://repository:tag
 ```
 ### Working with Images and Containers ###
 To enter a container
 ```
-singularity shell image.sif
+singularity shell $image.sif
 ```
 To run commands within the container from the host
 ```
-singularity exec image.sif command
+singularity exec $image.sif $command
 ```
 To execute the runscript of a container
 ```
-singularity run image.sif
+singularity run $image.sif
 ```
