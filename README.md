@@ -17,7 +17,7 @@ Images act as a snapshot of a container that Docker can build upon. They contain
 At runtime images become containers.
 
 ### Volumes ###
-Volumes are used to mount data so it can be accessed by a container.
+Volumes are used to mount data in Docker so it can be accessed by a container.
 
 ## Docker ##
 
@@ -30,6 +30,10 @@ docker search $searchterm
 Download an image from Docker Hub
 ```
 docker pull $repository:tag
+```
+Pull an image from quay.io
+```
+docker pull quay.io/$repository:tag
 ```
 
 ### Finding Image and Container Information ###
@@ -49,7 +53,7 @@ docker images
 ### Working with Images and Containers ###
 Build an image from a Dockerfile
 ```
-docker build -t $imagename -f path/to/Dockerfile
+docker build -t $imagename -f path/to/Dockerfile .
 ```
 Run an image, creating a container
 ```
@@ -98,7 +102,7 @@ Volumes are used to manage data in Docker. By default the data in a container wi
 
 We can attach a host volume to any directory in the container using the -v flag. Note that when attaching a volume you must provide Docker with the absolute (full) path.
 ```
-docker run -v /path/to/volume/on/host:/path/to/directory/in/container $imagename $command
+docker run -v /absolute/path/to/directory/on/host:/path/to/directory/in/container $imagename $command
 ```
 
 ## Singularity ##
@@ -111,15 +115,21 @@ Singularity can interact with many container registires:
 * Singularity Container Library (Sylabs)
 * Docker Hub
 * Singularity Hub (no longer being updated, archive only)
+* Quay.io
 
 Pulling an image from the Singularity Container Library
 ```
-singularity pull library://repository:tag
+singularity pull library://$repository:tag
 ```
 Pulling an image from Docker Hub
 ```
-singularity pull docker://repository:tag
+singularity pull docker://$repository:tag
 ```
+Pulling an image from quay.io
+```
+singularity pull docker://quay.io/$repository:tag
+```
+
 ### Working with Images and Containers ###
 To enter a container
 ```
